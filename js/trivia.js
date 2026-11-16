@@ -105,7 +105,7 @@ const Trivia = (function () {
     const pct = Math.round(S.right / 75 * 100), G = letter(pct);
     const title = pickFresh('title_' + G[1], G[2]), comment = pickFresh('cmt_' + G[1], G[3]);
     const best = store.get('triviaBest', 0); if (S.right > best) store.set('triviaBest', S.right);
-    const st = screen(); Synth.sfx(pct >= 70 ? 'win' : 'lose'); if (pct >= 70) { FX.burst(140); lightning(); }
+    const st = screen(); if (pct >= 70) { Synth.sting('win'); FX.burst(140); lightning(); } else Synth.sfx('lose');
     const rows = SEASONS.map((s, i) => `<tr><td>${s[2]}</td><td>${S.per[i]}/15</td><td>${letter(Math.round(S.per[i] / 15 * 100))[1]}</td></tr>`).join('');
     const rep = h('div', 'report pop', `
       <div class="grade">${G[1]}</div>

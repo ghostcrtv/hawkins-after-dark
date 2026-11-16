@@ -165,7 +165,7 @@ const CodeRed = (function () {
   function debrief() {
     const st = screen(); const R = score >= 3000 ? 'PARTY LEGEND' : score >= 2200 ? 'FIELD AGENT' : score >= 1400 ? 'JUNIOR OPERATIVE' : 'LAB RAT';
     const gateLine = { sealed: 'The gate is SEALED. Hawkins sleeps tonight.', held: 'The gate is holding. Barely. Somebody should keep an eye on it.', breached: 'The gate BREACHED. Grab your bike. Run.' }[log.gate];
-    const good = log.gate !== 'breached'; Synth.sfx(good ? 'win' : 'lose'); lightning(true); if (good) FX.burst(140);
+    const good = log.gate !== 'breached'; if (good) Synth.sting('win'); else Synth.sfx('lose'); lightning(true); if (good) FX.burst(140);
     const best = store.get('codeBest', 0), isBest = score > best; if (isBest) store.set('codeBest', score);
     let code; const seen = store.get('seen_code', []); do { code = `${pick(ADJ)} ${pick(NOUN)}`; } while (seen.includes(code) && seen.length < 100); seen.push(code); store.set('seen_code', seen.slice(-100));
     const p = h('div', 'panel endcard pop', `<div class="no">MISSION DEBRIEF</div><div class="h2">${gateLine}</div>
